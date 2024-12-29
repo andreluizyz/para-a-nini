@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presente para a Nicole</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background 1s ease;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+        }
+        .message {
+            font-size: 24px;
+            margin: 20px 0;
+            color: white; /* Cor do texto branca */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto */
+            font-weight: bold; /* Deixar o texto mais forte */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+        button:hover {
+            background-color: #ff4d4d;
+        }
+        .hidden {
+            display: none;
+        }
+        #fleeing-button {
+            position: absolute;
+        }
+        #question-container {
+            background-color: rgba(0, 0, 0, 0.6); /* Fundo translúcido para destacar o texto */
+            border-radius: 10px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Oi, Nicole!</h1>
+        <p class="message" id="message">Antes de clicar no botão, eu fiquei programando esse site especialmente para você, como a gente não consegue se ver por agora, eu acho que foi a melhor alternativa... 😊</p>
+        <button id="start-button" onclick="start()">Começar</button>
+        <div id="question-container" class="hidden">
+            <p id="question">Você aceita me dar uma segunda chance? 🥺</p>
+            <button id="yes-button" onclick="accept()">É claro que aceito, você é muito foda 💖</button>
+            <button id="fleeing-button" onmouseover="moveButton()">Vou pensar</button>
+        </div>
+    </div>
+    <script>
+        const messages = [
+            "Eu sei que errei, e estou muito arrependido de tudo que fiz com você",
+            "Não foi so um erro bobo, foi algo que fez quebrar a confiança e afastar nós 2... ",
+            "Por favor, me dê uma chance de consertar tudo 🙏",
+            "Você é incrível! E eu quero muito te dar oq você merece e te fazer muito feliz",
+        ];
+
+        let index = 0;
+        let startButton = document.getElementById("start-button");
+        let messageElement = document.getElementById("message");
+        let questionContainer = document.getElementById("question-container");
+
+        function start() {
+            startButton.style.display = "none";
+            showMessage();
+        }
+
+        function showMessage() {
+            if (index < messages.length) {
+                messageElement.textContent = messages[index];
+                index++;
+                setTimeout(showMessage, 3000); // Tempo entre mensagens
+            } else {
+                messageElement.textContent = "Estou disposto a fazer de tudo por você NICOLE! 💖";
+                setTimeout(showQuestion, 3000); // Exibe a pergunta após a última mensagem
+            }
+        }
+
+        function showQuestion() {
+            messageElement.style.display = "none";
+            questionContainer.classList.remove("hidden");
+        }
+
+        function accept() {
+            document.body.style.background = "url('btsnicole.jpeg') no-repeat center center fixed";
+            document.body.style.backgroundSize = "cover";
+            document.querySelector('.container').innerHTML = `
+                <h1>Obrigado, Nicole! 💖</h1>
+                <p class="message">Espero que você tenha gostado, eu queria ter feito um presente pessoalmente, mas infelizmente esse foi a única forma que eu pensei de entrega imediata...💜</p>
+            `;
+        }
+
+        function moveButton() {
+            const button = document.getElementById("fleeing-button");
+            const container = document.querySelector(".container");
+
+            const containerRect = container.getBoundingClientRect();
+            const newTop = Math.random() * (containerRect.height - 50);
+            const newLeft = Math.random() * (containerRect.width - 100);
+
+            button.style.top = `${newTop}px`;
+            button.style.left = `${newLeft}px`;
+        }
+    </script>
+</body>
+</html>
