@@ -14,6 +14,13 @@
             padding: 0;
             transition: background 1s ease;
         }
+
+        h1{
+            margin: 20px 0;
+            color: white; /* Cor do texto branca */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto */
+            font-weight: bold; /* Deixar o texto mais forte */
+        }
         .container {
             margin-top: 50px;
             padding: 20px;
@@ -34,6 +41,7 @@
             font-size: 16px;
             cursor: pointer;
             position: relative;
+            margin-bottom: 10px; /* Espaço entre os botões */
         }
         button:hover {
             background-color: #ff4d4d;
@@ -49,17 +57,34 @@
             border-radius: 10px;
             padding: 20px;
         }
+        /* Estilo para garantir que os botões fiquem empilhados em telas menores */
+        @media (max-width: 600px) {
+            #question-container {
+                display: block;
+                text-align: center;
+            }
+            #yes-button, #fleeing-button {
+                width: 100%; /* Botões ocupam toda a largura */
+                box-sizing: border-box;
+            }
+            #or {
+                margin: 20px 0;
+                font-size: 18px;
+                color: white;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Oi, Nicole!</h1>
+        <h1>Para a Nicole</h1>
         <p class="message" id="message">Antes de clicar no botão, eu fiquei programando esse site especialmente para você, como a gente não consegue se ver por agora, eu acho que foi a melhor alternativa... 😊</p>
         <button id="start-button" onclick="start()">Começar</button>
         <div id="question-container" class="hidden">
             <p id="question">Você aceita me dar uma segunda chance? 🥺</p>
+            <div id="or">OU</div> <!-- Texto entre os botões -->
             <button id="yes-button" onclick="accept()">É claro que aceito, você é muito foda 💖</button>
-            <button id="fleeing-button" onmouseover="moveButton()">Vou pensar</button>
+            <button id="fleeing-button" onmouseover="moveButton()">Vou pensar no seu caso</button>
         </div>
     </div>
     <script>
@@ -68,6 +93,7 @@
             "Não foi so um erro bobo, foi algo que fez quebrar a confiança e afastar nós 2... ",
             "Por favor, me dê uma chance de consertar tudo 🙏",
             "Você é incrível! E eu quero muito te dar oq você merece e te fazer muito feliz",
+            "Todos os dias eu fico pensando em você, pensando em tudo que eu te fiz...",
         ];
 
         let index = 0;
@@ -84,10 +110,10 @@
             if (index < messages.length) {
                 messageElement.textContent = messages[index];
                 index++;
-                setTimeout(showMessage, 3000); // Tempo entre mensagens
+                setTimeout(showMessage, 5000); // Tempo entre mensagens
             } else {
-                messageElement.textContent = "Estou disposto a fazer de tudo por você NICOLE! 💖";
-                setTimeout(showQuestion, 3000); // Exibe a pergunta após a última mensagem
+                messageElement.textContent = "Estou disposto a fazer de tudo de melhor por você NICOLE! Sem cometer os mesmos erros e ser o André que você deseja 💖";
+                setTimeout(showQuestion, 5000); // Exibe a pergunta após a última mensagem
             }
         }
 
@@ -100,8 +126,8 @@
             document.body.style.background = "url('btsnicole.jpeg') no-repeat center center fixed";
             document.body.style.backgroundSize = "cover";
             document.querySelector('.container').innerHTML = `
-                <h1>Obrigado, Nicole! 💖</h1>
-                <p class="message">Espero que você tenha gostado, eu queria ter feito um presente pessoalmente, mas infelizmente esse foi a única forma que eu pensei de entrega imediata...💜</p>
+                <h1>Nini 💖</h1>
+                <p class="message">Espero que você tenha gostado, eu queria ter feito um presente melhor pessoalmente para você, mas infelizmente esse foi a única forma que eu pensei de entrega imediata...💜</p>
             `;
         }
 
